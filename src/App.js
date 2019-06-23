@@ -1,26 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+  componentDidMount() {
+    this.loadData();
+    setInterval(this.loadData, 5000);
+  }
+
+  async loadData() {
+    try {
+      const res = await fetch('https://api.myjson.com/bins/seep5');
+      const blocks = await res.json();
+      console.log(blocks)
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  render() {
+    return (<div />);
+  }
+
 }
 
 export default App;
